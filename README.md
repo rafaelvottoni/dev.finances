@@ -2,6 +2,11 @@
 
 Site criado para o controle de finanças do usuário.
 
-Feito na Maratona Discover da Rocketseat, para o uso do conceitos de HTML, CSS e Javascript
+Feito na Maratona Discover da Rocketseat, com o auxilio do professor Mayk Brito.
 
-Nenhuma mudança em relação ao original 
+Tecnologias usadas:
+
+* HTML
+* CSS 
+* JavaScript
+
