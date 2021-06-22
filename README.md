@@ -3,7 +3,7 @@
 <h1 align="center">POUP.APP</h1>
 
 <h4 align="center"> 
-	🚧  Em construção...  🚧
+	🚧  ....... Em construção .......  🚧
 </h4>
 
 <img src="./assets/README/site (2).png" alt="Print do site">
