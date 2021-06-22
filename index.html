@@ -6,28 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>dev.finance$</title>
 
+    <!--css base-->
+
     <link rel="stylesheet" href="./style.css" />
+
+     <!--css icone logo-->
+
+    <link rel="stylesheet" href="./assets/icon logo/style.css">
+
+     <!--fontes gerais-->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400&display=swap"
       rel="stylesheet"
     />
+
+    <!--fonte do logo-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;700&display=swap" rel="stylesheet">
   </head>
 
   <body>
-    <!-- header, main e footer são tags semanticas -->
+  
 
     <header>
-      <!-- <h1 id="logo">dev.finance$</h1> -->
-      <!--Tirou o nome e colocou uma imagem-->
-      <img src="./assets/logo.svg" alt="Logo Dev Finances" />
+      <div id="logo"><i class="icon-coins"></i><h1>POUP.APP</h1></div>
+      
+    
     </header>
 
     <main class="container">
-      <!--Section geralmente começa com um h2-->
+     
       <section id="balance">
         <h2 class="sr-only">Balanço</h2>
-        <!--sr de screen reader-->
+        
 
         <div class="card">
           <h3>
@@ -46,7 +59,7 @@
         </div>
 
         <div class="card total">
-          <!--Posso dar varias classes para a mesma tag, e so separo por espaço como ai, class card e class total-->
+          
           <h3>
             <span> Total </span>
             <img src="./assets/total.svg" alt="Imagem de total" />
@@ -57,8 +70,7 @@
 
       <section id="transaction">
         <h2 class="sr-only">Transações</h2>
-        <!--Ao colocar o simbolo # ao clicar no link, eu não saio da pagina, apenas coloca uma # na url-->
-        <!--onclick foi adicionado junto com o javascript-->
+   
         <a href="#" onclick="Modal.open()" class="button new"
           >+ Nova Transação</a
         >
@@ -70,7 +82,6 @@
               <th>Valor</th>
               <th>Data</th>
               <th></th>
-              <!--Adicionei uma coluna nova vazia aqui, mas terão coisas nela nos outros-->
             </tr>
           </thead>
           <tbody></tbody>
@@ -79,14 +90,14 @@
     </main>
 
     <div class="modal-overlay">
-      <!--essa div tem duas classes.-->
+     
       <div class="modal">
         <div id="form">
           <h2>Nova Transação</h2>
           <form action="" onsubmit="Form.submit(event)">
             <div class="input-group">
               <label class="sr-only" for="description">Descrição</label>
-              <!--o label é linkado com o input e ele descreve esse input, com a palavra que peço, mas no caso eu quero que ele apareça apenas para os scren readers para ajudar na assessibilidade, ele explica o que está no input-->
+            
               <input
                 type="text"
                 id="description"
@@ -125,7 +136,7 @@
     </div>
 
     <footer>
-      <p>dev.finace$</p>
+      <p>POUP.APP</p>
     </footer>
 
     <script src="./script.js"></script>

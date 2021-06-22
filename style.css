@@ -1,4 +1,4 @@
-/* no css, as coisas tem valores, por exemplo o asterisco tem menos valor do que o h1 */
+
 
 /* Global =================================== */
 
@@ -8,7 +8,11 @@
   --green: #49aa26;
   --light-green: #3dd705;
   --red: #e92929;
-  /*criando uma variavel posso apenas chamar ela depois, a vantagem é poder mudar depois sem ter que mudar em cada elemento*/
+  --background: #DBE6FD;
+  --header: #47597E;
+  --logo: #293B5F;
+  --dark-logo:#162035;
+
 }
 
 * {
@@ -23,12 +27,11 @@ html {
 }
 
 body {
-  background: #f0f2f5;
+  background: var(--background);
   font-family: 'Poppins', sans-serif;
 }
 
 .sr-only {
-  /*ele usa esse truque para que as palavras com essa classe fique invisiveis para a visão, mas que os leitores de tela ainda possam acha-las e ler, para pessoas com dificuldades visuais. se usasse display: none o leitor de tela não consegue achar, todos esses codigos são para isso*/
   position: absolute;
   width: 1px;
   height: 1px;
@@ -42,7 +45,7 @@ body {
 
 .container {
   width: min(90vw, 800px);
-  /*essa função procurar o menor valor entre os dois argumentos que eu passo */
+
   margin: auto;
 }
 
@@ -82,13 +85,14 @@ button:hover {
 }
 
 .button.new {
-  /*Se eu coloco .button com um espaço eu coloco a .new, eu to dizendo para procurar dentro da .button algo com o nome .new, se eu coloco .button.new tudo junto eu to dizendo que eu quero a coisa que tem ao mesmo tempo o nome button e o nome new*/
+
   display: inline-block;
   margin-bottom: 0.8rem;
 }
 
 .button.cancel {
-  color: var(--red);
+  background: var(--red);
+  color: white;
   border: 2px var(--red) solid;
   border-radius: 0.25rem;
   height: 50px;
@@ -106,15 +110,28 @@ button:hover {
 /* Header =================================== */
 
 header {
-  background: #2d4a22;
+  background: var(--header);
   padding: 2rem 0 10rem;
   text-align: center;
 }
-
 #logo {
-  color: #fff;
-  font-weight: 100;
+  color: var(--dark-logo);
+  
+  font-family: 'Sarabun', sans-serif;
+  font-size: 1.3rem;
+  display:flex;
+  align-items: center;
+  justify-content:center;
 }
+
+#logo i{
+  font-size: 3rem;
+  margin-right: 1rem;
+  transform: translateY(8%);
+}
+
+
+
 
 /* Balance =================================== */
 
@@ -138,7 +155,7 @@ header {
 }
 
 .card h3 {
-  /*coisas importantes sobre posicionamento, align-items e justify-content*/
+  
   font-weight: normal;
   font-size: 1rem;
   display: flex;
@@ -153,7 +170,7 @@ header {
 }
 
 .card.total {
-  /*Posso chamar duas classes de uma vez, ai coloco os pontos como ai no .card.total */
+  
   background: var(--green);
   color: white;
 }
@@ -175,7 +192,7 @@ header {
   width: 100%;
   border-spacing: 0 0.5rem;
   color: #969cb3;
-  /*o comando a baixo diz: se for necessario criar a barra de rolagem no eixo x */
+  
 }
 
 table thead tr th:first-child,
@@ -244,7 +261,7 @@ td.expense {
 }
 
 .modal {
-  background: #f0f2f5;
+  background: var(--background);
   padding: 2.4rem;
   position: relative;
   z-index: 1;
