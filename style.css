@@ -1,5 +1,3 @@
-
-
 /* Global =================================== */
 
 :root {
@@ -8,11 +6,10 @@
   --green: #49aa26;
   --light-green: #3dd705;
   --red: #e92929;
-  --background: #DBE6FD;
-  --header: #47597E;
-  --logo: #293B5F;
-  --dark-logo:#162035;
-
+  --background: #dbe6fd;
+  --header: #47597e;
+  --logo: #293b5f;
+  --dark-logo: #162035;
 }
 
 * {
@@ -85,7 +82,6 @@ button:hover {
 }
 
 .button.new {
-
   display: inline-block;
   margin-bottom: 0.8rem;
 }
@@ -114,24 +110,26 @@ header {
   padding: 2rem 0 10rem;
   text-align: center;
 }
-#logo {
-  color: var(--dark-logo);
-  
-  font-family: 'Sarabun', sans-serif;
-  font-size: 1.3rem;
-  display:flex;
-  align-items: center;
-  justify-content:center;
+
+span.app {
+  color: var(--background);
 }
 
-#logo i{
+#logo {
+  color: var(--background);
+
+  font-family: 'Sarabun', sans-serif;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#logo i {
   font-size: 3rem;
   margin-right: 1rem;
   transform: translateY(8%);
 }
-
-
-
 
 /* Balance =================================== */
 
@@ -155,7 +153,6 @@ header {
 }
 
 .card h3 {
-  
   font-weight: normal;
   font-size: 1rem;
   display: flex;
@@ -170,7 +167,6 @@ header {
 }
 
 .card.total {
-  
   background: var(--green);
   color: white;
 }
@@ -192,7 +188,6 @@ header {
   width: 100%;
   border-spacing: 0 0.5rem;
   color: #969cb3;
-  
 }
 
 table thead tr th:first-child,
@@ -252,7 +247,7 @@ td.expense {
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  z-index: 999;
+  z-index: 998;
 }
 
 .modal-overlay.active {
@@ -265,6 +260,58 @@ td.expense {
   padding: 2.4rem;
   position: relative;
   z-index: 1;
+  border-radius: 0.05rem;
+}
+
+/* Modal error ===================================== */
+.modal-error {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 999;
+}
+
+.modal-error.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.error-message {
+  width: 20%;
+  height: 20%;
+  background-color: var(--dark-blue);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  text-align: center;
+  padding-top: 0;
+  z-index: 999;
+  border: 2px solid black;
+  border-radius: 0.25rem;
+}
+
+.modal-error.show .error-message h2 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: var(--background);
+}
+
+.icon-x {
+  color: var(--background);
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  right: 0.8rem;
+  top: 0.8rem;
 }
 
 /* Form ===================================== */
@@ -278,10 +325,12 @@ td.expense {
 }
 
 input {
+  background: white;
   border: none;
   border-radius: 0.2rem;
   padding: 0.8rem;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .input-group {
@@ -301,6 +350,11 @@ input {
 .input-group.actions .button,
 .input-group.actions button {
   width: 48%;
+}
+
+input.error {
+  border: 0.036rem solid var(--red);
+  background: white;
 }
 
 /* Footer =================================== */

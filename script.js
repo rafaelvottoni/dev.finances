@@ -1,14 +1,17 @@
-
 const Modal = {
   open() {
     //Abrir modal
-    
+
     document.querySelector('.modal-overlay').classList.add('active')
   },
   close() {
-    //Fechar o modal
-   
+    //Fechar o modal e remover os erros
     document.querySelector('.modal-overlay').classList.remove('active')
+    const verifyError = document.querySelectorAll('input')
+
+    for (const element of verifyError) {
+      element.classList.remove('error')
+    }
   }
 }
 
@@ -24,20 +27,18 @@ function changeColor() {
 
 const Storage = {
   get() {
-    return JSON.parse(localStorage.getItem('dev.finances:transactions')) || [] // 
+    return JSON.parse(localStorage.getItem('dev.finances:transactions')) || [] //
   },
 
   set(transactions) {
     localStorage.setItem(
       'dev.finances:transactions',
       JSON.stringify(transactions)
-    ) 
+    )
   }
 }
 
-
 const Transaction = {
-  
   all: Storage.get(),
 
   add(transaction) {
@@ -51,7 +52,6 @@ const Transaction = {
   },
 
   incomes() {
-    
     let income = 0
     Transaction.all.forEach(transaction => {
       if (transaction.amount > 0) {
@@ -62,7 +62,6 @@ const Transaction = {
   },
 
   expenses() {
-    
     let expense = 0
     Transaction.all.forEach(transaction => {
       if (transaction.amount < 0) {
@@ -73,9 +72,7 @@ const Transaction = {
   },
 
   total() {
-
-
-    return Transaction.incomes() + Transaction.expenses() 
+    return Transaction.incomes() + Transaction.expenses()
   }
 }
 
@@ -87,8 +84,6 @@ const Total = {
     document.querySelector('.total').classList.remove('negative')
   }
 }
-
-
 
 const DOM = {
   transactionsContainer: document.querySelector('#data-table tbody'),
@@ -149,12 +144,11 @@ const Utils = {
   formatCurrency(value) {
     const signal = Number(value) < 0 ? '-' : ''
 
-    value = String(value).replace(/\D/g, '') 
+    value = String(value).replace(/\D/g, '')
 
     value = Number(value) / 100
 
     value = value.toLocaleString('pt-BR', {
-      
       style: 'currency',
       currency: 'BRL'
     })
@@ -162,9 +156,16 @@ const Utils = {
   }
 }
 
-const Form = {
-  
+const ErrorModal = {
+  openError() {
+    document.querySelector('.modal-error').classList.add('show')
+  },
+  closeError() {
+    document.querySelector('.modal-error').classList.remove('show')
+  }
+}
 
+const Form = {
   description: document.querySelector('input#description'),
   amount: document.querySelector('input#amount'),
   date: document.querySelector('input#date'),
@@ -177,16 +178,37 @@ const Form = {
     }
   },
 
+  formatError() {
+    const { description, amount, date } = Form.getValues()
+
+    if (description.trim() === '') {
+      document.querySelector('.input-group #description').classList.add('error')
+    } else {
+      document
+        .querySelector('.input-group #description')
+        .classList.remove('error')
+    }
+    if (amount.trim() === '') {
+      document.querySelector('.input-group #amount').classList.add('error')
+    } else {
+      document.querySelector('.input-group #amount').classList.remove('error')
+    }
+    if (date.trim() === '') {
+      document.querySelector('.input-group #date').classList.add('error')
+    } else {
+      document.querySelector('.input-group #date').classList.remove('error')
+    }
+  },
+
   validateField() {
     const { description, amount, date } = Form.getValues()
 
-    
     if (
       description.trim() === '' ||
       amount.trim() === '' ||
       date.trim() === ''
     ) {
-      throw new Error('Por favor, preencha todos os campos')
+      throw new Error()
     }
   },
 
@@ -198,7 +220,6 @@ const Form = {
     date = Utils.formatDate(date)
 
     return {
-     
       description,
       amount,
       date
@@ -216,20 +237,20 @@ const Form = {
   },
 
   submit(event) {
-    event.preventDefault() 
+    event.preventDefault()
 
     try {
-      Form.validateField() 
+      Form.validateField()
 
-      const transaction = Form.formatValues() 
+      const transaction = Form.formatValues()
 
-      Form.saveTransaction(transaction) 
+      Form.saveTransaction(transaction)
 
-      Form.clearFields() 
+      Form.clearFields()
 
-      Modal.close() 
+      Modal.close()
     } catch (error) {
-      alert(error.message) 
+      Form.formatError(), ErrorModal.openError()
     }
   }
 }
@@ -237,8 +258,6 @@ const Form = {
 const App = {
   init() {
     Transaction.all.forEach((transaction, index) => {
-      
-
       DOM.addTransaction(transaction, index)
     })
 
@@ -248,7 +267,7 @@ const App = {
   },
   reload() {
     changeColor()
-    DOM.clearTransactions() 
+    DOM.clearTransactions()
 
     App.init()
   }

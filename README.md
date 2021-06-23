@@ -34,7 +34,7 @@ Projeto foi desenvolvido na Maratona Discover da Rocketseat, com a mentoria do p
 
 - [x] Modificar nome e cores
 - [x] Adicionar cor vermelha no card total se o saldo for negativo
-- [ ] Personalizar mensagem de erro
+- [x] Personalizar mensagem de erro
 - [ ] Adicionar modo escuro
 - [ ] Formatar o campo valor no Modal para aparecer em forma financeira
 - [ ] Acrescentar um botão "Excluir tudo"
