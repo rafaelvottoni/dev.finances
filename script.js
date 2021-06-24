@@ -264,17 +264,41 @@ const getStyle = (element, style) =>
   window.getComputedStyle(element).getPropertyValue(style)
 
 const initialColors = {
-  blueLight: getStyle(html, '--blue-light'),
-  blue: getStyle(html, '--blue'),
-  blueMedium: getStyle(html, '--blue-medium'),
-  blueDark: getStyle(html, '--blue-dark')
+  logo: getStyle(html, '--logo'),
+  header: getStyle(html, '--header'),
+  body: getStyle(html, '--body'),
+  colorTable: getStyle(html, '--color-table'),
+  fontFooter: getStyle(html, '--font-footer'),
+  toggleBackground: getStyle(html, '--toggle-background'),
+  togleLabel: getStyle(html, '--togle-label'),
+  positive: getStyle(html, '--positive'),
+  lightGreen: getStyle(html, '--light-green'),
+  negative: getStyle(html, '--negative'),
+  fontsCardTotal: getStyle(html, '--fonts-card-tota'),
+  fonts: getStyle(html, '--fonts'),
+  fontNewTransation: getStyle(html, '--font-new-transation'),
+  fontsModal: getStyle(html, '--fonts-modal'),
+  error: getStyle(html, '--error'),
+  fontError: getStyle(html, '--font-error')
 }
 
 const darkMode = {
-  blueLight: '#293b5f',
-  blue: '#162035',
-  blueMedium: '#dbe6fd',
-  blueDark: '#dbe6fd'
+  // logo:
+  header: '#162035',
+  body: '#47597e',
+  colorTable: '#dbe6fd',
+  fontFooter: '#dbe6fd',
+  toggleBackground: '#47597e',
+  togleLabel: '#dbe6fd',
+  positive: '#2a6b13',
+  lightGreen: '#49aa26',
+  negative: '#971515',
+  // fontsCardTotal:
+  // fonts:
+  // fontNewTransation:
+  fontsModal: '#dbe6fd'
+  // error:
+  // fontError:
 }
 
 const transformKey = key => '--' + key.replace(/([A-Z])/, '-$1').toLowerCase()

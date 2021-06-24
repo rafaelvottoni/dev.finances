@@ -3,13 +3,34 @@
 :root {
   /*root referencia a tag html*/
 
-  --green: #49aa26;
+  /*Colors*/
+
+  /*header and body*/
+  --logo: #dbe6fd;
+  --header: #47597e;
+  --body: #dbe6fd;
+  --color-table: #ffffff;
+  --font-footer: #162035;
+
+  /*toggle*/
+
+  --toggle-background: #dbe6fd;
+  --togle-label: #162035;
+
+  /* colors icons and fonts */
+
+  --positive: #49aa26;
   --light-green: #3dd705;
-  --red: #e92929;
-  --blue-light: #dbe6fd;
-  --blue: #47597e;
-  --blue-medium: #293b5f;
-  --blue-dark: #162035;
+  --negative: #e92929;
+  --fonts-card-total: #ffffff;
+  --fonts: #162035;
+  --font-new-transation: #49aa26;
+  --fonts-modal: #162035;
+
+  /* Error message*/
+
+  --error: #162035;
+  --font-error: #dbe6fd;
 }
 
 * {
@@ -24,7 +45,7 @@ html {
 }
 
 body {
-  background: var(--blue-light);
+  background: var(--body);
   font-family: 'Poppins', sans-serif;
 }
 
@@ -51,14 +72,14 @@ body {
 h2 {
   margin-top: 3.2rem;
   margin-bottom: 0.8rem;
-  color: var(--blue-dark);
+  color: var(--fonts-modal);
   font-weight: normal;
 }
 
 /* Links & Buttons ========================== */
 
 a {
-  color: var(--green);
+  color: var(--font-new-transation);
   text-decoration: none;
 }
 
@@ -71,7 +92,7 @@ button {
   height: 50px;
   border: none;
   color: white;
-  background: var(--green);
+  background: var(--positive);
   padding: 0;
   border-radius: 0.25rem;
   cursor: pointer;
@@ -87,9 +108,9 @@ button:hover {
 }
 
 .button.cancel {
-  background: var(--red);
+  background: var(--negative);
   color: white;
-  border: 2px var(--red) solid;
+  border: 2px var(--negative) solid;
   border-radius: 0.25rem;
   height: 50px;
   opacity: 0.6;
@@ -106,17 +127,17 @@ button:hover {
 /* Header =================================== */
 
 header {
-  background: var(--blue);
+  background: var(--header);
   padding: 2rem 0 10rem;
   text-align: center;
 }
 
 span.app {
-  color: var(--blue-light);
+  color: var(--logo);
 }
 
 #logo {
-  color: var(--blue-light);
+  color: var(--logo);
 
   font-family: 'Sarabun', sans-serif;
   font-size: 1.3rem;
@@ -138,18 +159,17 @@ span.app {
 }
 
 #balance h2 {
-  color: white;
   margin-top: 0;
 }
 
 /* Cards =================================== */
 
 .card {
-  background: white;
+  background: var(--color-table);
   padding: 1.5rem 2rem;
   border-radius: 0.25rem;
   margin-bottom: 2rem;
-  color: var(--blue-dark);
+  color: var(--fonts);
 }
 
 .card h3 {
@@ -167,13 +187,12 @@ span.app {
 }
 
 .card.total {
-  background: var(--green);
-  color: white;
+  background: var(--positive);
+  color: var(--fonts-card-total);
 }
 
 .card.total.negative {
-  background: var(--red);
-  color: white;
+  background: var(--negative);
 }
 
 /* Table =================================== */
@@ -187,7 +206,7 @@ span.app {
 #data-table {
   width: 100%;
   border-spacing: 0 0.5rem;
-  color: #969cb3;
+  color: var(--fonts);
 }
 
 table thead tr th:first-child,
@@ -203,7 +222,7 @@ table tbody tr td:last-child {
 }
 
 table thead th {
-  background: white;
+  background: var(--color-table);
   font-weight: normal;
   padding: 1rem 2rem;
   text-align: left;
@@ -218,20 +237,20 @@ table tbody tr:hover {
 }
 
 table tbody td {
-  background: white;
+  background: var(--color-table);
   padding: 1rem 2rem;
 }
 
 td.description {
-  color: var(--blue-dark);
+  color: var(--fonts);
 }
 
 td.income {
-  color: #12a454;
+  color: var(--positive);
 }
 
 td.expense {
-  color: #e92929;
+  color: var(--negative);
 }
 
 /* modal ==================================== */
@@ -256,7 +275,7 @@ td.expense {
 }
 
 .modal {
-  background: var(--blue-light);
+  background: var(--body);
   padding: 2.4rem;
   position: relative;
   z-index: 1;
@@ -286,7 +305,7 @@ td.expense {
 .error-message {
   width: 254px;
   height: 127px;
-  background-color: var(--blue-dark);
+  background-color: var(--error);
   position: relative;
   display: flex;
   align-items: center;
@@ -303,12 +322,12 @@ td.expense {
 .modal-error.show .error-message h2 {
   margin-top: 1rem;
   margin-bottom: 1rem;
-  color: var(--blue-light);
+  color: var(--font-error);
   font: 1rem;
 }
 
 .icon-x {
-  color: var(--blue-light);
+  color: var(--font-error);
   font-size: 1.5rem;
   cursor: pointer;
   position: absolute;
@@ -327,7 +346,7 @@ td.expense {
 }
 
 input {
-  background: white;
+  background: var(--color-table);
   border: none;
   border-radius: 0.2rem;
   padding: 0.8rem;
@@ -340,7 +359,8 @@ input {
 }
 
 .input-group small {
-  opacity: 0.4;
+  opacity: 0.6;
+  color: var(--fonts-modal);
 }
 
 .input-group.actions {
@@ -356,15 +376,13 @@ input {
 
 input.error {
   border: 0.036rem solid var(--red);
-  background: white;
 }
-
 /* Footer =================================== */
 
 footer {
   text-align: center;
   padding: 4rem 0 2rem;
-  color: var(--blue-dark);
+  color: var(--font-footer);
   opacity: 0.6;
 }
 
@@ -387,7 +405,7 @@ label {
   text-indent: -9999px;
   width: 50px;
   height: 25px;
-  background: var(--blue-light);
+  background: var(--toggle-background);
   float: right;
   border-radius: 100px;
   position: relative;
@@ -404,19 +422,19 @@ label::after {
   left: 2px;
   width: 20px;
   height: 20px;
-  background-color: var(--blue-dark);
+  background-color: var(--togle-label);
   border-radius: 90px;
   transition: 0.3s;
 }
 
 input:checked + label {
-  background-color: var(--blue-medium);
+  background-color: var(--toggle-background);
 }
 
 input:checked + label::after {
   left: calc(100% - 5px);
   transform: translateX(-100%);
-  background-color: var(--blue-light);
+  background-color: var(--togle-label);
 }
 
 label:active:after {
