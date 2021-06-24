@@ -255,6 +255,42 @@ const Form = {
   }
 }
 
+/* Change mode ==================================*/
+
+const html = document.querySelector('html')
+const checkbox = document.querySelector('input[name=theme]')
+
+const getStyle = (element, style) =>
+  window.getComputedStyle(element).getPropertyValue(style)
+
+const initialColors = {
+  blueLight: getStyle(html, '--blue-light'),
+  blue: getStyle(html, '--blue'),
+  blueMedium: getStyle(html, '--blue-medium'),
+  blueDark: getStyle(html, '--blue-dark')
+}
+
+const darkMode = {
+  blueLight: '#293b5f',
+  blue: '#162035',
+  blueMedium: '#dbe6fd',
+  blueDark: '#dbe6fd'
+}
+
+const transformKey = key => '--' + key.replace(/([A-Z])/, '-$1').toLowerCase()
+
+const changeColors = colors => {
+  Object.keys(colors).map(key =>
+    html.style.setProperty(transformKey(key), colors[key])
+  )
+}
+
+checkbox.addEventListener('change', ({ target }) => {
+  target.checked ? changeColors(darkMode) : changeColors(initialColors)
+})
+
+/* Fim do change mode ====================================*/
+
 const App = {
   init() {
     Transaction.all.forEach((transaction, index) => {

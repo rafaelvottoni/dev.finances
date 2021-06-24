@@ -2,14 +2,14 @@
 
 :root {
   /*root referencia a tag html*/
-  --dark-blue: #363f5f;
+
   --green: #49aa26;
   --light-green: #3dd705;
   --red: #e92929;
-  --background: #dbe6fd;
-  --header: #47597e;
-  --logo: #293b5f;
-  --dark-logo: #162035;
+  --blue-light: #dbe6fd;
+  --blue: #47597e;
+  --blue-medium: #293b5f;
+  --blue-dark: #162035;
 }
 
 * {
@@ -24,7 +24,7 @@ html {
 }
 
 body {
-  background: var(--background);
+  background: var(--blue-light);
   font-family: 'Poppins', sans-serif;
 }
 
@@ -51,7 +51,7 @@ body {
 h2 {
   margin-top: 3.2rem;
   margin-bottom: 0.8rem;
-  color: var(--dark-blue);
+  color: var(--blue-dark);
   font-weight: normal;
 }
 
@@ -106,17 +106,17 @@ button:hover {
 /* Header =================================== */
 
 header {
-  background: var(--header);
+  background: var(--blue);
   padding: 2rem 0 10rem;
   text-align: center;
 }
 
 span.app {
-  color: var(--background);
+  color: var(--blue-light);
 }
 
 #logo {
-  color: var(--background);
+  color: var(--blue-light);
 
   font-family: 'Sarabun', sans-serif;
   font-size: 1.3rem;
@@ -149,7 +149,7 @@ span.app {
   padding: 1.5rem 2rem;
   border-radius: 0.25rem;
   margin-bottom: 2rem;
-  color: var(--dark-blue);
+  color: var(--blue-dark);
 }
 
 .card h3 {
@@ -223,7 +223,7 @@ table tbody td {
 }
 
 td.description {
-  color: var(--dark-blue);
+  color: var(--blue-dark);
 }
 
 td.income {
@@ -256,7 +256,7 @@ td.expense {
 }
 
 .modal {
-  background: var(--background);
+  background: var(--blue-light);
   padding: 2.4rem;
   position: relative;
   z-index: 1;
@@ -284,14 +284,14 @@ td.expense {
 }
 
 .error-message {
-  width: 60%;
-  height: 30%;
-  background-color: var(--dark-blue);
+  width: 254px;
+  height: 127px;
+  background-color: var(--blue-dark);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+
   text-align: center;
   padding-top: 0;
   z-index: 999;
@@ -303,17 +303,17 @@ td.expense {
 .modal-error.show .error-message h2 {
   margin-top: 1rem;
   margin-bottom: 1rem;
-  color: var(--background);
+  color: var(--blue-light);
   font: 1rem;
 }
 
 .icon-x {
-  color: var(--background);
+  color: var(--blue-light);
   font-size: 1.5rem;
   cursor: pointer;
   position: absolute;
   right: 0.8rem;
-  top: 0.8rem;
+  top: 0.5rem;
 }
 
 /* Form ===================================== */
@@ -364,8 +364,63 @@ input.error {
 footer {
   text-align: center;
   padding: 4rem 0 2rem;
-  color: var(--dark-blue);
+  color: var(--blue-dark);
   opacity: 0.6;
+}
+
+/* Dark mode ================================= */
+#toggle {
+  position: absolute;
+  top: 6rem;
+  right: 50%;
+  transform: translateX(50%);
+}
+
+input[type='checkbox'] {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+label {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 50px;
+  height: 25px;
+  background: var(--blue-light);
+  float: right;
+  border-radius: 100px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+label::after {
+  content: '';
+  position: absolute;
+  top: 2.75px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: var(--blue-dark);
+  border-radius: 90px;
+  transition: 0.3s;
+}
+
+input:checked + label {
+  background-color: var(--blue-medium);
+}
+
+input:checked + label::after {
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
+  background-color: var(--blue-light);
+}
+
+label:active:after {
+  width: 50px;
 }
 
 /* Responsive ================================ */
@@ -382,34 +437,15 @@ footer {
     gap: 2rem;
   }
   .error-message {
-    width: 20%;
-    height: 20%;
-    background-color: var(--dark-blue);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
-    text-align: center;
-    padding-top: 0;
-    z-index: 999;
-    border: 2px solid black;
-    border-radius: 0.25rem;
-    box-sizing: border-box;
+    width: 254px;
+    height: 127px;
   }
+}
 
-  .modal-error.show .error-message h2 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    color: var(--background);
-  }
-
-  .icon-x {
-    color: var(--background);
-    font-size: 1.5rem;
-    cursor: pointer;
+@media (min-width: 500px) {
+  #toggle {
     position: absolute;
-    right: 0.8rem;
-    top: 0.8rem;
+    top: 3rem;
+    right: 3rem;
   }
 }
