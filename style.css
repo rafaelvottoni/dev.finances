@@ -117,13 +117,13 @@ button:hover {
 .button.delete-all {
   border: none;
   color: white;
-  padding: 50px;
+  width: auto;
+  height: auto;
   cursor: pointer;
   text-align: center;
-  padding: 0.5rem;
-  clip-path: circle();
+  padding: 0.5rem 0.8rem;
+  border-radius: 100%;
   font-size: 1.5rem;
-  line-height: 0;
 }
 
 .button.delete-all {
@@ -132,6 +132,7 @@ button:hover {
 
 .button.new {
   background: var(--positive);
+  align-items: center;
 }
 
 .button.cancel {
@@ -183,6 +184,8 @@ span.app {
 
 #balance {
   margin-top: -5.5rem;
+  display: grid;
+  gap: 2rem;
 }
 
 #balance h2 {
@@ -195,7 +198,6 @@ span.app {
   background: var(--color-table);
   padding: 1.5rem 2rem;
   border-radius: 0.25rem;
-
   color: var(--fonts);
 }
 
@@ -362,6 +364,74 @@ td.expense {
   top: 0.5rem;
 }
 
+/* Modal delete-all ========================= */
+.delete-all-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 999;
+}
+
+.delete-all-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-delete-all {
+  width: auto;
+  height: 127px;
+  background-color: var(--error);
+  position: relative;
+
+  align-items: center;
+  justify-content: space-between;
+  z-index: 999;
+  border: 2px solid black;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  text-align: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.modal-delete-all h2 {
+  color: var(--font-error);
+  margin-top: 0.5rem;
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.buttons .button-delete {
+  background: var(--font-error);
+  color: var var(--error);
+  border: 2px var(--font-error) solid;
+  border-radius: 0.25rem;
+  height: 50px;
+  opacity: 0.6;
+  /*Alinhar ao meio*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons .button-delete:hover {
+  opacity: 1;
+}
+
 /* Form ===================================== */
 
 #form {
@@ -477,9 +547,8 @@ label:active:after {
   }
   #balance {
     /* display grid é muito bom para alinhar, como coloquei uma fraçao pra cada um, eles vao ficar iguais, mas pode variar colocar 2fr 1fr e fr por exemplo*/
-    display: grid;
+
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 2rem;
   }
   .error-message {
     width: 254px;

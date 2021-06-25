@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?kvs88k');
-  src:  url('fonts/icomoon.eot?kvs88k#iefix') format('embedded-opentype'),
+  src: url('fonts/icomoon.eot?kvs88k');
+  src: url('fonts/icomoon.eot?kvs88k#iefix') format('embedded-opentype'),
     url('fonts/icomoon.ttf?kvs88k') format('truetype'),
     url('fonts/icomoon.woff?kvs88k') format('woff'),
     url('fonts/icomoon.svg?kvs88k#icomoon') format('svg');
@@ -10,10 +10,11 @@
   font-display: block;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^='icon-'],
+[class*=' icon-'] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
-  speak: never;
+
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -26,17 +27,17 @@
 }
 
 .icon-coins:before {
-  content: "\e901";
+  content: '\e901';
 }
 .icon-money:before {
-  content: "\e901";
+  content: '\e901';
 }
 .icon-trash-2:before {
-  content: "\e902";
+  content: '\e902';
 }
 .icon-plus:before {
-  content: "\e903";
+  content: '\e903';
 }
 .icon-x:before {
-  content: "\e900";
+  content: '\e900';
 }

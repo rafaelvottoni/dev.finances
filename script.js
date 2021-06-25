@@ -55,6 +55,7 @@ const Transaction = {
     for (var i = 0; i <= Transaction.all.length; i++) {
       Transaction.all.pop()
     }
+    document.querySelector('.delete-all-overlay').classList.remove('show')
     App.reload()
   },
 
@@ -169,6 +170,15 @@ const ErrorModal = {
   },
   closeError() {
     document.querySelector('.modal-error').classList.remove('show')
+  }
+}
+
+const DeleteAll = {
+  openDeleteAll() {
+    document.querySelector('.delete-all-overlay').classList.add('show')
+  },
+  closeDeleteAll() {
+    document.querySelector('.delete-all-overlay').classList.remove('show')
   }
 }
 

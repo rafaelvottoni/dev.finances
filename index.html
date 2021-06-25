@@ -99,7 +99,7 @@
 
 
 <div class="button-delete">
-  <a href="#" onclick="Transaction.removeAll()" class="button delete-all"><i class="icon-trash-2"></i></a>
+  <a href="#" onclick="DeleteAll.openDeleteAll()" class="button delete-all"><i class="icon-trash-2"></i></a>
 </main>
 </div>
 
@@ -176,6 +176,18 @@
       </div>
     </div>
 
+    <!--Modal delete tudo-->
+    <div class="delete-all-overlay">
+      <div class="modal-delete-all">
+        <h2>Deseja excluir tudo?</h2>
+        <div class="buttons">
+
+          <a href="#"  onclick="DeleteAll.closeDeleteAll()" class="button-delete">Não</a>
+          <a href="#"  onclick="Transaction.removeAll()" class="button-delete">Sim</a>
+
+        </div>
+      </div>
+    </div>
     <footer>
       <p>POUP.APP</p>
     </footer>

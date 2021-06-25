@@ -39,7 +39,7 @@ Projeto foi desenvolvido na Maratona Discover da Rocketseat, com a mentoria do p
 - [x] Personalizar mensagem de erro
 - [x] Adicionar modo escuro
 - [ ] Formatar o campo valor no Modal para aparecer em forma financeira
-- [ ] Acrescentar um botão "Excluir tudo"
+- [x] Acrescentar um botão "Excluir tudo"
 - [ ] Acrescentar a opção de escolher se é uma entrada ou saida, para evitar o uso do sinal de menos
 - [ ] Acrescentar gráficos
 - [ ] Acrescentar tags aos gastos
