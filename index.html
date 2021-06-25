@@ -75,10 +75,12 @@
       <section id="transaction">
         <h2 class="sr-only">Transações</h2>
 
-        <a href="#" onclick="Modal.open()" class="button new"
-          >+ Nova Transação</a
-        >
-
+        
+ <div class="button-new"><a href="#" onclick="Modal.open()" class="button new"
+  ><i class="icon-plus"></i
+></a></div>
+ 
+ 
         <table id="data-table">
           <thead>
             <tr>
@@ -91,7 +93,32 @@
           <tbody></tbody>
         </table>
       </section>
-    </main>
+
+     
+     
+
+
+<div class="button-delete">
+  <a href="#" onclick="Transaction.removeAll()" class="button delete-all"><i class="icon-trash-2"></i></a>
+</main>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <div class="modal-overlay">
       <div class="modal">

@@ -51,6 +51,13 @@ const Transaction = {
     App.reload()
   },
 
+  removeAll() {
+    for (var i = 0; i <= Transaction.all.length; i++) {
+      Transaction.all.pop()
+    }
+    App.reload()
+  },
+
   incomes() {
     let income = 0
     Transaction.all.forEach(transaction => {
