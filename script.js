@@ -27,14 +27,11 @@ function changeColor() {
 
 const Storage = {
   get() {
-    return JSON.parse(localStorage.getItem('dev.finances:transactions')) || [] //
+    return JSON.parse(localStorage.getItem('pop.app:transactions')) || [] //
   },
 
   set(transactions) {
-    localStorage.setItem(
-      'dev.finances:transactions',
-      JSON.stringify(transactions)
-    )
+    localStorage.setItem('pop.app:transactions', JSON.stringify(transactions))
   }
 }
 
