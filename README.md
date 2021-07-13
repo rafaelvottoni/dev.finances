@@ -4,8 +4,10 @@
 
 <h3 align="center" ><a href="https://poupapp.netlify.app/">Site POUP.APP</a> </h3>
 
-<img src="./assets/README/site (2).png" alt="Print do site">
-<img src="./assets/README/site (1).png" alt="Print do site">
+<img src="./assets/README/site1.png" alt="Print do site">
+<img src="./assets/README/site2.png" alt="Print do site">
+<img src="./assets/README/site3.png" alt="Print do site">
+<img src="./assets/README/site4.png" alt="Print do site">
 
 # Índice
 
