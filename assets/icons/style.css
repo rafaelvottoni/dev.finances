@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src: url('fonts/icomoon.eot?kvs88k');
-  src: url('fonts/icomoon.eot?kvs88k#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?kvs88k') format('truetype'),
-    url('fonts/icomoon.woff?kvs88k') format('woff'),
-    url('fonts/icomoon.svg?kvs88k#icomoon') format('svg');
+  src: url('fonts/icomoon.eot?s2uhti');
+  src: url('fonts/icomoon.eot?s2uhti#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?s2uhti') format('truetype'),
+    url('fonts/icomoon.woff?s2uhti') format('woff'),
+    url('fonts/icomoon.svg?s2uhti#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -26,18 +26,51 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-coins:before {
+.icon-clothing:before {
+  content: '\e900';
+}
+.icon-transport:before {
   content: '\e901';
 }
-.icon-money:before {
-  content: '\e901';
-}
-.icon-trash-2:before {
+.icon-health:before {
   content: '\e902';
 }
-.icon-plus:before {
+.icon-food:before {
   content: '\e903';
 }
+.icon-others:before {
+  content: '\e904';
+}
+.icon-leisure:before {
+  content: '\e905';
+}
+.icon-github:before {
+  content: '\e906';
+}
+.icon-linkedin:before {
+  content: '\e907';
+}
+.icon-house:before {
+  content: '\e908';
+}
 .icon-x:before {
-  content: '\e900';
+  content: '\e909';
+}
+.icon-minus-circle:before {
+  content: '\e90a';
+}
+.icon-income:before {
+  content: '\e90b';
+}
+.icon-arrow-down-circle:before {
+  content: '\e90c';
+}
+.icon-arrow-up-circle:before {
+  content: '\e90d';
+}
+.icon-trash-2:before {
+  content: '\e90e';
+}
+.icon-plus:before {
+  content: '\e90f';
 }

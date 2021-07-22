@@ -1,37 +1,27 @@
-const Modal = {
-  open() {
-    //Abrir modal
-
-    document.querySelector('.modal-overlay').classList.add('active')
+const Modals = {
+  modalForm() {
+    document.querySelector('.modal-form-overlay').classList.toggle('show')
   },
-  close() {
-    //Fechar o modal e remover os erros
-    document.querySelector('.modal-overlay').classList.remove('active')
-    const verifyError = document.querySelectorAll('input')
 
-    for (const element of verifyError) {
-      element.classList.remove('error')
-    }
-  }
-}
+  modalErrorOpen() {
+    document.querySelector('.modal-error-overlay').classList.add('show')
+  },
 
-function changeColor() {
-  let result = Transaction.total()
+  modalErrorClose() {
+    document.querySelector('.modal-error-overlay').classList.remove('show')
+  },
 
-  if (result < 0) {
-    Total.negative()
-  } else {
-    Total.positive()
+  modalDeleteAll() {
+    document.querySelector('.modal-delete-overlay').classList.toggle('show')
   }
 }
 
 const Storage = {
   get() {
-    return JSON.parse(localStorage.getItem('pop.app:transactions')) || [] //
+    return JSON.parse(localStorage.getItem('poup.app:transactions')) || []
   },
-
   set(transactions) {
-    localStorage.setItem('pop.app:transactions', JSON.stringify(transactions))
+    localStorage.setItem('poup.app:transactions', JSON.stringify(transactions))
   }
 }
 
@@ -52,7 +42,7 @@ const Transaction = {
     for (var i = 0; i <= Transaction.all.length; i++) {
       Transaction.all.pop()
     }
-    document.querySelector('.delete-all-overlay').classList.remove('show')
+    document.querySelector('.modal-delete-overlay').classList.remove('show')
     App.reload()
   },
 
@@ -81,22 +71,13 @@ const Transaction = {
   }
 }
 
-const Total = {
-  negative() {
-    document.querySelector('.total').classList.add('negative')
-  },
-  positive() {
-    document.querySelector('.total').classList.remove('negative')
-  }
-}
-
 const DOM = {
   transactionsContainer: document.querySelector('#data-table tbody'),
+
   addTransaction(transaction, index) {
     const tr = document.createElement('tr')
     tr.innerHTML = DOM.innerHTMLTransaction(transaction, index)
     tr.dataset.index = index
-
     DOM.transactionsContainer.appendChild(tr)
   },
 
@@ -106,15 +87,13 @@ const DOM = {
     const amount = Utils.formatCurrency(transaction.amount)
 
     const html = `
-            
-                <td class="description">${transaction.description}</td>
-                <td class="${CSSclass}">${amount}</td>
-                <td class="date">${transaction.date}</td>
-                <td>
-                    <img onclick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover transação">
-                </td>
-            
-            `
+      <td class="${CSSclass}">${amount}</td>
+      <td class="description">${transaction.description}</td>
+      <td class="category"> <i class="icon-${transaction.category}"></i></td>
+      <td class="date">${transaction.date}</td>
+      <td> <i class ="icon-minus-circle" onclick="Transaction.remove(${index})"></i></td> 
+      `
+
     return html
   },
 
@@ -157,25 +136,8 @@ const Utils = {
       style: 'currency',
       currency: 'BRL'
     })
+
     return signal + value
-  }
-}
-
-const ErrorModal = {
-  openError() {
-    document.querySelector('.modal-error').classList.add('show')
-  },
-  closeError() {
-    document.querySelector('.modal-error').classList.remove('show')
-  }
-}
-
-const DeleteAll = {
-  openDeleteAll() {
-    document.querySelector('.delete-all-overlay').classList.add('show')
-  },
-  closeDeleteAll() {
-    document.querySelector('.delete-all-overlay').classList.remove('show')
   }
 }
 
@@ -183,6 +145,23 @@ const Form = {
   description: document.querySelector('input#description'),
   amount: document.querySelector('input#amount'),
   date: document.querySelector('input#date'),
+
+  typeOfTransaction() {
+    let typeOfTransaction = document.getElementsByName('type-transaction')
+
+    for (let i = 0; i < typeOfTransaction.length; i++) {
+      if (typeOfTransaction[i].checked) {
+        return typeOfTransaction[i].value
+      }
+    }
+    return null
+  },
+
+  categoryOfTransaction() {
+    let getCategory = document.getElementById('tag')
+    let category = getCategory.options[getCategory.selectedIndex].value
+    return category
+  },
 
   getValues() {
     return {
@@ -192,6 +171,94 @@ const Form = {
     }
   },
 
+  validateFields() {
+    const { description, amount, date } = Form.getValues()
+
+    if (
+      description.trim() === '' ||
+      amount.trim() === '' ||
+      date.trim() === '' ||
+      Form.typeOfTransaction() === null
+    ) {
+      throw new Error()
+    }
+  },
+
+  formatValues() {
+    let { description, amount, date } = Form.getValues()
+
+    if (Form.typeOfTransaction() == 'expense') {
+      amount = -amount
+    }
+
+    amount = Utils.formatAmount(amount)
+
+    date = Utils.formatDate(date)
+
+    category = Form.categoryOfTransaction()
+
+    return {
+      description: description,
+      amount: amount,
+      date: date,
+      category: category
+    }
+  },
+
+  clearFields() {
+    Form.description.value = ''
+    Form.amount.value = ''
+    Form.date.value = ''
+  },
+
+  clearTypeOfTransaction() {
+    let TypeOfTransaction = document.getElementsByName('type-transaction')
+    for (let i = 0; i < TypeOfTransaction.length; i++)
+      TypeOfTransaction[i].checked = false
+  },
+
+  submit(event) {
+    event.preventDefault()
+
+    try {
+      Form.validateFields()
+      const transaction = Form.formatValues()
+      Transaction.add(transaction)
+      Form.clearFields()
+      Form.clearTypeOfTransaction()
+      Modals.modalForm()
+    } catch (error) {
+      Modals.modalErrorOpen()
+      ErrorForm.formatError()
+    }
+  }
+}
+
+const FormatOptionOfSelection = {
+  modifyOptions: `
+  <option value="others" selected>Outros</option>
+  <option value="food">Alimentação</option>
+  <option value="house">Casa</option>
+  <option value="leisure">Lazer</option>
+  <option value="health">Saúde</option>
+  <option value="transport">Transporte</option>
+  <option value="clothing">Vestuário</option>
+  `,
+
+  selectHTML: document.querySelector('#tag'),
+
+  ifExpense() {
+    this.selectHTML.innerHTML = ''
+    this.selectHTML.innerHTML = this.modifyOptions
+  },
+
+  ifIncome() {
+    this.selectHTML.innerHTML = ''
+    this.selectHTML.innerHTML = `<option value="income" selected>Entrada</option>`
+  }
+}
+
+const ErrorForm = {
   formatError() {
     const { description, amount, date } = Form.getValues()
 
@@ -212,122 +279,30 @@ const Form = {
     } else {
       document.querySelector('.input-group #date').classList.remove('error')
     }
-  },
-
-  validateField() {
-    const { description, amount, date } = Form.getValues()
-
-    if (
-      description.trim() === '' ||
-      amount.trim() === '' ||
-      date.trim() === ''
-    ) {
-      throw new Error()
+    if (Form.typeOfTransaction() == null) {
+      document.querySelector('.type-transaction').classList.add('error')
+    } else {
+      document.querySelector('.type-transaction').classList.remove('error')
     }
   },
 
-  formatValues() {
-    let { description, amount, date } = Form.getValues()
-
-    amount = Utils.formatAmount(amount)
-
-    date = Utils.formatDate(date)
-
-    return {
-      description,
-      amount,
-      date
-    }
-  },
-
-  saveTransaction(transaction) {
-    Transaction.add(transaction)
-  },
-
-  clearFields() {
-    Form.description.value = ''
-    Form.amount.value = ''
-    Form.date.value = ''
-  },
-
-  submit(event) {
-    event.preventDefault()
-
-    try {
-      Form.validateField()
-
-      const transaction = Form.formatValues()
-
-      Form.saveTransaction(transaction)
-
-      Form.clearFields()
-
-      Modal.close()
-    } catch (error) {
-      Form.formatError(), ErrorModal.openError()
-    }
+  removeError() {
+    document
+      .querySelector('.input-group #description')
+      .classList.remove('error')
+    document.querySelector('.input-group #amount').classList.remove('error')
+    document.querySelector('.input-group #date').classList.remove('error')
+    document.querySelector('.type-transaction').classList.remove('error')
   }
 }
 
-/* Change mode ==================================*/
+const DarkMode = {
+  HTML: document.querySelector('html'),
 
-const html = document.querySelector('html')
-const checkbox = document.querySelector('input[name=theme]')
-
-const getStyle = (element, style) =>
-  window.getComputedStyle(element).getPropertyValue(style)
-
-const initialColors = {
-  logo: getStyle(html, '--logo'),
-  header: getStyle(html, '--header'),
-  body: getStyle(html, '--body'),
-  colorTable: getStyle(html, '--color-table'),
-  fontFooter: getStyle(html, '--font-footer'),
-  toggleBackground: getStyle(html, '--toggle-background'),
-  togleLabel: getStyle(html, '--togle-label'),
-  positive: getStyle(html, '--positive'),
-  lightGreen: getStyle(html, '--light-green'),
-  negative: getStyle(html, '--negative'),
-  fontsCardTotal: getStyle(html, '--fonts-card-tota'),
-  fonts: getStyle(html, '--fonts'),
-  fontNewTransation: getStyle(html, '--font-new-transation'),
-  fontsModal: getStyle(html, '--fonts-modal'),
-  error: getStyle(html, '--error'),
-  fontError: getStyle(html, '--font-error')
+  changeMode() {
+    this.HTML.classList.toggle('dark-mode')
+  }
 }
-
-const darkMode = {
-  // logo:
-  header: '#162035',
-  body: '#47597e',
-  colorTable: '#dbe6fd',
-  fontFooter: '#dbe6fd',
-  toggleBackground: '#47597e',
-  togleLabel: '#dbe6fd',
-  positive: '#2a6b13',
-  lightGreen: '#49aa26',
-  negative: '#971515',
-  // fontsCardTotal:
-  // fonts:
-  // fontNewTransation:
-  fontsModal: '#dbe6fd'
-  // error:
-  // fontError:
-}
-
-const transformKey = key => '--' + key.replace(/([A-Z])/, '-$1').toLowerCase()
-
-const changeColors = colors => {
-  Object.keys(colors).map(key =>
-    html.style.setProperty(transformKey(key), colors[key])
-  )
-}
-
-checkbox.addEventListener('change', ({ target }) => {
-  target.checked ? changeColors(darkMode) : changeColors(initialColors)
-})
-
-/* Fim do change mode ====================================*/
 
 const App = {
   init() {
@@ -336,13 +311,10 @@ const App = {
     })
 
     DOM.updateBalance()
-
     Storage.set(Transaction.all)
   },
   reload() {
-    changeColor()
     DOM.clearTransactions()
-
     App.init()
   }
 }

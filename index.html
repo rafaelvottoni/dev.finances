@@ -1,156 +1,199 @@
 <!DOCTYPE html>
 <html lang="pt_br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>poup.app</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>POUP.APP</title>
+    <!--Icons -->
 
-  <!--css iconens-->
+    <link rel="stylesheet" href="./assets/icons/style.css" />
 
-  <link rel="stylesheet" href="./assets/icons/style.css" />
+    <!--CSS-->
+    <link rel="stylesheet" href="./styles/style.css" />
+  </head>
 
-  <!--css base-->
-
-  <link rel="stylesheet" href="./style.css" />
-
-  <!--fontes gerais-->
-  <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400&display=swap"
-    rel="stylesheet" />
-
-  <!--fonte do logo-->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;700&display=swap" rel="stylesheet" />
-</head>
-
-<body>
-  <header>
-    <div id="logo">
-      <i class="icon-coins"></i>
-      <h1>POUP.APP</h1>
-    </div>
-  </header>
-
-  <div id="toggle">
-    <input id="switch" type="checkbox" name="theme" />
-    <label for="switch">Toggle</label>
-  </div>
-
-  <main class="container">
-    <section id="balance">
-      <h2 class="sr-only">Balanço</h2>
-
-      <div class="card">
-        <h3>
-          <span> Entradas </span>
-          <img src="./assets/income.svg" alt="Imagem de entradas" />
-        </h3>
-        <p id="incomeDisplay">R$ 0,00</p>
+  <body>
+    <header>
+      <div id="logo">poup<span>.</span>app</div>
+      <div id="toggle">
+        <input
+          id="switch"
+          type="checkbox"
+          name="theme"
+          onchange="DarkMode.changeMode()"
+        />
+        <label id="label" for="switch">Toggle</label>
       </div>
+    </header>
+    <main class="container">
+      <section id="balance">
+        <div class="card">
+          <h3>Total</h3>
+          <p id="totalDisplay">R$ 0,00</p>
+          <br />
 
-      <div class="card">
-        <h3>
-          <span> Saídas </span>
-          <img src="./assets/expense.svg" alt="Imagem de saídas" />
-        </h3>
-        <p id="expenseDisplay">R$ 0,00</p>
-      </div>
-
-      <div class="card total">
-        <h3>
-          <span> Total </span>
-          <img src="./assets/total.svg" alt="Imagem de total" />
-        </h3>
-        <p id="totalDisplay">R$ 0,00</p>
-      </div>
-    </section>
-
-    <section id="transaction">
-      <h2 class="sr-only">Transações</h2>
-
-
-      <div class="button-new"><a href="#" onclick="Modal.open()" class="button new"><i class="icon-plus"></i></a></div>
-
-
-      <table id="data-table">
-        <thead>
-          <tr>
-            <th>Descrição</th>
-            <th>Valor</th>
-            <th>Data</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
-
-
-    <div class="button-delete">
-      <a href="#" onclick="DeleteAll.openDeleteAll()" class="button delete-all"><i class="icon-trash-2"></i></a>
-  </main>
-  </div>
-  <div class="modal-overlay">
-    <div class="modal">
-      <div id="form">
-        <h2>Nova Transação</h2>
-        <form action="" onsubmit="Form.submit(event)">
-          <div class="input-group description">
-            <label class="sr-only" for="description">Descrição</label>
-
-            <input type="text" id="description" name="description" placeholder="Descrição" />
+          <div class="income-expense-display">
+            <div class="incomes">
+              <h6><i class="icon-arrow-up-circle"></i> Entradas</h6>
+              <p id="incomeDisplay"></p>
+            </div>
+            <div class="expenses">
+              <h6><i class="icon-arrow-down-circle"></i> Saídas</h6>
+              <p id="expenseDisplay"></p>
+            </div>
           </div>
-          <div class="input-group amount">
-            <label class="sr-only" for="amount">Valor</label>
+        </div>
+        <div class="card">
+          <h3>Categorias</h3>
+        </div>
+      </section>
+      <section id="buttons-homepage">
+        <div class="button-new">
+          <a href="#" onclick="Modals.modalForm()" class="button new"
+            ><i class="icon-plus"></i
+          ></a>
+        </div>
+        <div class="button-delete">
+          <a
+            href="#"
+            onclick="Modals.modalDeleteAll()"
+            class="button delete-all"
+            ><i class="icon-trash-2"></i
+          ></a>
+        </div>
+      </section>
+      <section id="transaction">
+        <h3>Transações</h3>
+        <table id="data-table">
+          <thead>
+            <tr>
+              <th>Valor</th>
+              <th>Descrição</th>
+              <th>Categoria</th>
+              <th>Data</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </main>
+    <footer>
+      <p>poup.app</p>
 
-            <input type="number" step="0.01" id="amount" name="amount" placeholder="0,00" />
+      <div class="dev-informations">
+        <p>© Rafael Ottoni</p>
+        <a href="https://github.com/rafaelvottoni" target="_blank"
+          ><i class="icon icon-github"></i
+        ></a>
 
-            <small class="help">Use o sinal - (negativo) para despesas e , (vírgula) para casas
-              decimais</small>
-          </div>
-          <div class="input-group date">
-            <label class="sr-only" for="date">Data</label>
-            <input type="date" id="date" name="date" />
-          </div>
+        <a href="https://www.linkedin.com/in/rafaelvottoni/" target="_blank"
+          ><i class="icon icon-linkedin"></i
+        ></a>
+      </div>
+    </footer>
 
-          <div class="input-group actions">
-            <a href="#" onclick="Modal.close()" class="button cancel">Cancelar</a>
-            <button>Salvar</button>
-          </div>
-        </form>
+    <div class="modal-form-overlay">
+      <div class="modal">
+        <div id="form">
+          <h2>Nova Transação</h2>
+          <form id="form" action="" onsubmit="Form.submit(event)">
+            <div class="type-transaction input">
+              <label>
+                <input
+                  type="radio"
+                  name="type-transaction"
+                  value="income"
+                  onclick="FormatOptionOfSelection.ifIncome()"
+                />
+                <i class="icon-arrow-up-circle" aria-hidden="true"></i>
+                <p>Entrada</p>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="type-transaction"
+                  value="expense"
+                  onclick="FormatOptionOfSelection.ifExpense()"
+                />
+                <i class="icon-arrow-down-circle" aria-hidden="true"></i>
+                <p>Saída</p>
+              </label>
+            </div>
+
+            <div class="input-group description">
+              <label class="label-modal" for="description">Descrição</label>
+
+              <input
+                type="text"
+                id="description"
+                name="description"
+                placeholder="Descrição"
+                class="input"
+              />
+            </div>
+            <div class="input-group amount">
+              <label class="label-modal" for="amount">Valor</label>
+
+              <input
+                type="number"
+                step="0.01"
+                id="amount"
+                name="amount"
+                placeholder="0,00"
+                class="input"
+              />
+            </div>
+
+            <div class="input-group tag">
+              <label class="label-modal" for="tag">Categoria</label>
+
+              <select id="tag" name="tag">
+                <option value="income" selected>Entrada</option>
+              </select>
+            </div>
+
+            <div class="input-group date">
+              <label class="label-modal" for="date">Data</label>
+              <input type="date" id="date" name="date" class="input" />
+            </div>
+
+            <div class="input-group actions">
+              <a
+                href="#"
+                onclick="Modals.modalForm(), ErrorForm.removeError()"
+                class="button cancel"
+                >Cancelar
+              </a>
+              <button>Salvar</button>
+            </div>
+          </form>
+        </div>
+        <p>poup.app</p>
       </div>
     </div>
-  </div>
 
-  <!--Modal de erro-->
-
-  <div class="modal-error">
-    <div class="error-message">
-      <h2>Todos os campos são obrigatórios</h2>
-      <i class="icon-x" onclick="ErrorModal.closeError()"></i>
-    </div>
-  </div>
-
-  <!--Modal delete tudo-->
-  <div class="delete-all-overlay">
-    <div class="modal-delete-all">
-      <h2>Deseja excluir tudo?</h2>
-      <div class="buttons">
-
-        <a href="#" onclick="DeleteAll.closeDeleteAll()" class="button-delete">Não</a>
-        <a href="#" onclick="Transaction.removeAll()" class="button-delete">Sim</a>
-
+    <div class="modal-error-overlay">
+      <div class="modal-error">
+        <h3>Todos os campos são obrigatórios</h3>
+        <button onclick="Modals.modalErrorClose()">Ok</button>
+        <p>poup.app</p>
       </div>
     </div>
-  </div>
-  <footer>
-    <p>POUP.APP</p>
-  </footer>
 
-  <script src="./script.js"></script>
-</body>
+    <div class="modal-delete-overlay">
+      <div class="modal-delete">
+        <h3>Excluir todas as transações?</h3>
+        <div class="buttons-delete">
+          <button onclick="Modals.modalDeleteAll()">Não</button>
+          <button onclick="Transaction.removeAll()">Sim</button>
+        </div>
+        <p>poup.app</p>
+      </div>
+    </div>
 
+    <script src="./script.js"></script>
+  </body>
 </html>
