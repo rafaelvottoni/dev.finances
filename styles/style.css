@@ -53,8 +53,8 @@ header #logo {
 }
 
 .container {
-  padding-left: 2rem;
-  padding-right: 2rem;
+  /* padding-left: 2rem;
+  padding-right: 2rem; */
   width: min(90vw, 900px);
   margin: auto;
 }
@@ -204,6 +204,7 @@ input:checked + #label::after {
 
 /*Table ====================*/
 #transaction {
+  min-width: 300px;
   display: block;
   width: 100%;
   overflow-x: auto;
@@ -606,5 +607,12 @@ footer {
   #balance {
     display: flex;
     flex-direction: column;
+  }
+
+  table tbody td.income,
+  table tbody td.expense {
+    background: var(--white);
+    padding: 2rem 0rem 2rem 1rem;
+    color: var(--gray);
   }
 } ;
