@@ -38,4 +38,4 @@ Projeto foi desenvolvido na Maratona Discover da Rocketseat, com a mentoria do p
 - [x] Adicionar modo escuro
 - [x] Acrescentar um botão "Excluir tudo"
 - [x] Acrescentar tags para os gastos
-- [ ] Acrescentar gráficos
+- [x] Acrescentar gráficos

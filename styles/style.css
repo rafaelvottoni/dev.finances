@@ -655,6 +655,14 @@ footer {
     color: var(--gray);
   }
 
+  td.income {
+    color: var(--green);
+  }
+
+  td.expense {
+    color: var(--red);
+  }
+
   .income-expense-display {
     justify-content: space-between;
   }
