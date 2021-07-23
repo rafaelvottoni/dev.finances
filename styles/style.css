@@ -652,7 +652,6 @@ footer {
   table tbody td.expense {
     background: var(--white);
     padding: 2rem 0rem 2rem 1rem;
-    color: var(--gray);
   }
 
   td.income {
