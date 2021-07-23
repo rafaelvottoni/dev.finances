@@ -39,9 +39,8 @@ const Transaction = {
   },
 
   removeAll() {
-    for (var i = 0; i <= Transaction.all.length; i++) {
-      Transaction.all.pop()
-    }
+    Transaction.all = []
+
     document.querySelector('.modal-delete-overlay').classList.remove('show')
     App.reload()
   },
@@ -224,7 +223,7 @@ const Form = {
       Form.validateFields()
       const transaction = Form.formatValues()
       Transaction.add(transaction)
-      DataGraph.saveDataGraph()
+
       Form.clearFields()
       Form.clearTypeOfTransaction()
       ErrorForm.removeError()
@@ -313,6 +312,7 @@ const App = {
     })
 
     DOM.updateBalance()
+    DataGraph.saveDataGraph()
     Storage.set(Transaction.all)
   },
   reload() {
@@ -323,76 +323,98 @@ const App = {
 
 const DataGraph = {
   saveDataGraph() {
-    let category = Form.categoryOfTransaction()
+    localStorage.removeItem('others')
+    localStorage.removeItem('food')
+    localStorage.removeItem('house')
+    localStorage.removeItem('leisure')
+    localStorage.removeItem('health')
+    localStorage.removeItem('transport')
+    localStorage.removeItem('clothing')
 
-    switch (category) {
-      case 'others':
-        let others = localStorage.getItem('others')
+    Transaction.all.forEach((category, index) => {
+      category = Transaction.all[index].category
 
-        if (others == null) {
-          others = 0
-        }
-        others = parseFloat(others) + parseFloat(Form.amount.value)
-        localStorage.setItem('others', others)
-        break
-      case 'food':
-        let food = localStorage.getItem('food')
+      switch (category) {
+        case 'others':
+          let others = localStorage.getItem('others')
 
-        if (food == null) {
-          food = 0
-        }
+          if (others == null) {
+            others = 0
+          }
+          others =
+            parseFloat(others) +
+            parseFloat(-Transaction.all[index].amount / 100)
+          localStorage.setItem('others', others)
+          break
+        case 'food':
+          let food = localStorage.getItem('food')
 
-        food = parseFloat(food) + parseFloat(Form.amount.value)
+          if (food == null) {
+            food = 0
+          }
 
-        localStorage.setItem('food', food)
-        break
-      case 'house':
-        let house = localStorage.getItem('house')
-        if (house == null) {
-          house = 0
-        }
+          food =
+            parseFloat(food) + parseFloat(-Transaction.all[index].amount / 100)
 
-        house = parseFloat(house) + parseFloat(Form.amount.value)
-        localStorage.setItem('house', house)
-        break
-      case 'leisure':
-        let leisure = localStorage.getItem('leisure')
-        if (leisure == null) {
-          leisure = 0
-        }
+          localStorage.setItem('food', food)
+          break
+        case 'house':
+          let house = localStorage.getItem('house')
+          if (house == null) {
+            house = 0
+          }
 
-        leisure = parseFloat(leisure) + parseFloat(Form.amount.value)
-        localStorage.setItem('leisure', leisure)
-        break
-      case 'health':
-        let health = localStorage.getItem('health')
-        if (health == null) {
-          health = 0
-        }
+          house =
+            parseFloat(house) + parseFloat(-Transaction.all[index].amount / 100)
+          localStorage.setItem('house', house)
+          break
+        case 'leisure':
+          let leisure = localStorage.getItem('leisure')
+          if (leisure == null) {
+            leisure = 0
+          }
 
-        health = parseFloat(health) + parseFloat(Form.amount.value)
-        localStorage.setItem('health', health)
-        break
-      case 'transport':
-        let transport = localStorage.getItem('transport')
-        if (transport == null) {
-          transport = 0
-        }
+          leisure =
+            parseFloat(leisure) +
+            parseFloat(-Transaction.all[index].amount / 100)
+          localStorage.setItem('leisure', leisure)
+          break
+        case 'health':
+          let health = localStorage.getItem('health')
+          if (health == null) {
+            health = 0
+          }
 
-        transport = parseFloat(transport) + parseFloat(Form.amount.value)
-        localStorage.setItem('transport', transport)
-        break
-      case 'clothing':
-        let clothing = localStorage.getItem('clothing')
+          health =
+            parseFloat(health) +
+            parseFloat(-Transaction.all[index].amount / 100)
+          localStorage.setItem('health', health)
+          break
+        case 'transport':
+          let transport = localStorage.getItem('transport')
+          if (transport == null) {
+            transport = 0
+          }
 
-        if (clothing == null) {
-          clothing = 0
-        }
+          transport =
+            parseFloat(transport) +
+            parseFloat(-Transaction.all[index].amount / 100)
+          localStorage.setItem('transport', transport)
+          break
+        case 'clothing':
+          let clothing = localStorage.getItem('clothing')
 
-        clothing = parseFloat(clothing) + parseFloat(Form.amount.value)
-        localStorage.setItem('clothing', clothing)
-        break
-    }
+          if (clothing == null) {
+            clothing = 0
+          }
+
+          clothing =
+            parseFloat(clothing) +
+            parseFloat(-Transaction.all[index].amount / 100)
+          localStorage.setItem('clothing', clothing)
+          break
+      }
+    })
   }
 }
 

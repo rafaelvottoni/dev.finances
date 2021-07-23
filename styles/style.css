@@ -637,6 +637,9 @@ footer {
     display: flex;
     flex-direction: column;
   }
+  #totalDisplay {
+    font-size: 2rem;
+  }
 
   table tbody td {
     background: var(--white);
