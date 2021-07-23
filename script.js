@@ -224,8 +224,10 @@ const Form = {
       Form.validateFields()
       const transaction = Form.formatValues()
       Transaction.add(transaction)
+      DataGraph.saveDataGraph()
       Form.clearFields()
       Form.clearTypeOfTransaction()
+      ErrorForm.removeError()
       Modals.modalForm()
     } catch (error) {
       Modals.modalErrorOpen()
@@ -318,5 +320,156 @@ const App = {
     App.init()
   }
 }
+
+const DataGraph = {
+  saveDataGraph() {
+    let category = Form.categoryOfTransaction()
+
+    switch (category) {
+      case 'others':
+        let others = localStorage.getItem('others')
+
+        if (others == null) {
+          others = 0
+        }
+        others = parseFloat(others) + parseFloat(Form.amount.value)
+        localStorage.setItem('others', others)
+        break
+      case 'food':
+        let food = localStorage.getItem('food')
+
+        if (food == null) {
+          food = 0
+        }
+
+        food = parseFloat(food) + parseFloat(Form.amount.value)
+
+        localStorage.setItem('food', food)
+        break
+      case 'house':
+        let house = localStorage.getItem('house')
+        if (house == null) {
+          house = 0
+        }
+
+        house = parseFloat(house) + parseFloat(Form.amount.value)
+        localStorage.setItem('house', house)
+        break
+      case 'leisure':
+        let leisure = localStorage.getItem('leisure')
+        if (leisure == null) {
+          leisure = 0
+        }
+
+        leisure = parseFloat(leisure) + parseFloat(Form.amount.value)
+        localStorage.setItem('leisure', leisure)
+        break
+      case 'health':
+        let health = localStorage.getItem('health')
+        if (health == null) {
+          health = 0
+        }
+
+        health = parseFloat(health) + parseFloat(Form.amount.value)
+        localStorage.setItem('health', health)
+        break
+      case 'transport':
+        let transport = localStorage.getItem('transport')
+        if (transport == null) {
+          transport = 0
+        }
+
+        transport = parseFloat(transport) + parseFloat(Form.amount.value)
+        localStorage.setItem('transport', transport)
+        break
+      case 'clothing':
+        let clothing = localStorage.getItem('clothing')
+
+        if (clothing == null) {
+          clothing = 0
+        }
+
+        clothing = parseFloat(clothing) + parseFloat(Form.amount.value)
+        localStorage.setItem('clothing', clothing)
+        break
+    }
+  }
+}
+
+// Graphic
+
+const Graph = {
+  others: parseFloat(localStorage.getItem('others')),
+  food: parseFloat(localStorage.getItem('food')),
+  house: parseFloat(localStorage.getItem('house')),
+  leisure: parseFloat(localStorage.getItem('leisure')),
+  health: parseFloat(localStorage.getItem('health')),
+  transport: parseFloat(localStorage.getItem('transport')),
+  clothing: parseFloat(localStorage.getItem('clothing'))
+}
+
+let ctx = document.querySelector('.chart')
+
+let chart = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: [
+      'Outros',
+      'Alimentação',
+      'Casa',
+      'Lazer',
+      'Saúde',
+      'Transporte',
+      'Vestuário'
+    ],
+    datasets: [
+      {
+        data: [
+          Graph.others,
+          Graph.food,
+          Graph.house,
+          Graph.leisure,
+          Graph.health,
+          Graph.transport,
+          Graph.clothing
+        ],
+        backgroundColor: [
+          '#FF9899',
+          '#FFC198',
+          '#FFE590',
+          '#B8FFA3',
+          '#A6F9FF',
+          '#9CB7FE',
+          '#BE9EFF'
+        ],
+        hoverOffset: 4,
+        borderWidth: 1,
+        position: 'left'
+      }
+    ]
+  },
+  options: {
+    aspectRatio: 2.2,
+    layout: {
+      padding: 0
+    },
+    plugins: {
+      legend: {
+        align: 'center',
+        position: 'right',
+        labels: {
+          textAlign: 'left',
+          boxWidth: 15,
+          color: '#AEAEB6',
+          borderColor: 'white',
+          padding: 3,
+          font: {
+            family: "'Poppins', 'sans-serif'"
+          }
+        }
+      }
+    }
+  }
+})
 
 App.init()
