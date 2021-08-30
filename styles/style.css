@@ -45,6 +45,7 @@ header #logo {
   color: var(--light-blue);
   font-size: 1.5rem;
   font-weight: bold;
+  line-height: 0;
 }
 
 #logo span {

@@ -12,7 +12,7 @@
 
 # Índice
 
-• <a href="#objetivo">Sobre</a>
+• <a href="#sobre">Sobre</a>
 • <a href="#tecnologias">Tecnologias</a>
 • <a href="#updates">Updates</a>
 
